@@ -12,7 +12,7 @@
         }
     }
 
-    class Food extends Product{
+    class Food extends Product {
         public $food_type;
         public $amount;
 
