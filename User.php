@@ -1,23 +1,61 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     class User {
-        public $name;
-        public $surname;
-        public $age;
-        public $iscrizione;
-        protected $sconto= 0;
+        public $address;
+
+        public $email;
+
+        public $creditCardNumber;
+        public $creditCardExpiryDate;
+        public $creditCardOwner;
+        public $creditCardCvv;
+        
+        public $cart = [];
+        
+    
 
 
-        function __construct($_name, $_surname, $_age, $_iscrizione){
-            $this->name = $_name;
-            $this->surname = $_surname;
-            $this->age = $_age;
-            $this->iscrizione = $_iscrizione;
+        function __construct($_email){
+            $this->email = $_email;
+            
         }
 
-        function getSconto($iscrizione){
-            if ($iscrizione == true){
-                $this->sconto = 20% ;
-            }
+        public function addProduct($product){
+            $this->cart[] = $product;
+        }       
+
+        public function checkOut(){
+            $totalPrice = 0;
+            $totalVat = 0;
+
+            foreach($this->products as $product){
+                $totalPrice += $product->price ;
+                $totalVat += ($product->price * $product->vat / 100) ;
+            }return{
+                'total' => $totalPrice;
+                'vat' => $totalVat;
+                'granTotal' => $totalPrice + $totalVat;
+            };
+        }
+    };
+
+
+    class RegisteredUser extends User{
+        public $name;
+        public $surname;
+        private $password;
+
+        public function checkOut(){
+            $totalCartPrice = parent::checkout();
+
+            return{
+                'total' => $totalCartPrice['total']* 0.8;
+                'vat' => $totalVat;
+                'granTotal' => $totalPrice + $totalVat;
+            };
         }
     };
 

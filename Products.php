@@ -3,6 +3,7 @@
         public $name;
         public $price;
         public $animal;
+        public $category;
 
 
         function __construct($_name, $_price, $_animal){
@@ -15,6 +16,7 @@
     class Food extends Product {
         public $food_type;
         public $amount;
+        public $category = 'Food';
 
         function __construct($_name, $_price, $_animal, $_food_type, $_amount){
             parent::__construct($_name, $_price, $_animal);
@@ -23,7 +25,10 @@
         }
     };
     
-
+    class Game extends Product{
+        public $category = 'Game';
+        public $material;
+    }
 
 
 ?>

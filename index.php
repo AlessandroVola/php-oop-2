@@ -1,4 +1,7 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     require_once __DIR__ . '/Products.php';
     require_once __DIR__ . '/User.php';
@@ -13,7 +16,7 @@
     print_r($snackCane);
 
 
-    $luca = new User('Luca','Tedioli','25', true);
+    $luca = new User('lucaTedioli@gmail.com' );
 
     print_r($luca);
 ?>
